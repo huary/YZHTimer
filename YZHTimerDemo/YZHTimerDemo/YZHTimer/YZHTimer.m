@@ -81,9 +81,7 @@
 -(instancetype)_initWithFireTimeAfter:(NSTimeInterval)timeAfter interval:(NSTimeInterval)interval target:(id)target selector:(SEL)selector repeat:(BOOL)repeat wallTime:(BOOL)wallTime queue:(dispatch_queue_t)queue userInfo:(id)userInfo isToTarget:(BOOL)isToTarget fireBlock:(YZHTimerFireBlock)fireBlock
 {
     self = [super init];
-    if (self) {
-        wallTime = YES;
-        
+    if (self) {        
         _userInfo = userInfo;
         _timeInterval = interval;
         _repeat = repeat;
@@ -103,7 +101,7 @@
         
         _sem = dispatch_semaphore_create(1);
         dispatch_queue_t q = queue;
-        if (q) {
+        if (!q) {
             q = dispatch_get_main_queue();
         }
         _timerSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, q);

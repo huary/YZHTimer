@@ -39,9 +39,9 @@
     
     [self cancelTimer];
     
-    __block NSTimeInterval interval = 10;
+    __block NSTimeInterval interval = 1.0;
     [self startTimerInterval:interval actionBlock:^(id object, YZHTimer *timer) {
-        NSLog(@"timer=%@,time=%f",timer,[timer elapseTime]);
+        NSLog(@"timer=%@,time=%f,thread=%@",timer,[timer elapseTime],[NSThread currentThread]);
     }];
     
     
